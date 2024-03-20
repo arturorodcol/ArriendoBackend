@@ -7,16 +7,16 @@ class Server{
 private app: Application;
 private port: string;
 private apiPaths = {
-    cliente: "/api/v1/cliente",
+    cliente: "/api/v1/cliente/",
 };
 
     constructor(){
         this.app = express();
         this.port = process.env.PORT || "3000"; 
 
-        dbConnection();
-        this.middlewares();
-        this.routes();
+        dbConnection(); //conectar con mongoose//
+        this.middlewares(); // agregar seguridad//
+        this.routes();  //agregar rutas // 
     }
 
     miPrimeraApi(){
@@ -26,12 +26,12 @@ private apiPaths = {
     }  
 
     middlewares(){
-        this.app.use(express.json()); 
+        this.app.use(express.json()); // todo lo conviere a json // 
         this.miPrimeraApi();
     }
 
     routes(): void{
-        this.app.use(this.apiPaths.cliente, clienteRoutes )
+        this.app.use(this.apiPaths.cliente, clienteRoutes );
     }
 
     listen(): void {

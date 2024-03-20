@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+//nuevo Schema inmuebleArrendado
 const ClienteSchema = new mongoose_1.Schema({
     nombre: { type: String, required: true },
-    direccion: { type: String, required: true },
+    direccion: { type: String, required: false },
     telefono: { type: Number, required: true },
     email: { type: String, required: true },
     tipoDocumento: { type: String, required: true },

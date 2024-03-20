@@ -1,8 +1,10 @@
 import { Model, Schema, model } from "mongoose";
 
+//nuevo Schema inmuebleArrendado
+
 const ClienteSchema = new Schema ({
     nombre: { type: String, required: true},
-    direccion: { type: String, required: true}, 
+    direccion: { type: String, required: false}, 
     telefono: { type: Number, required: true},
     email: { type: String, required: true},
     tipoDocumento: { type: String, required: true},

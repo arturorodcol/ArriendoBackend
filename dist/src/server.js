@@ -9,19 +9,19 @@ const cliente_route_1 = __importDefault(require("./routes/cliente.route"));
 class Server {
     constructor() {
         this.apiPaths = {
-            cliente: "/api/v1/cliente",
+            cliente: "/api/v1/cliente/",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "3000";
-        (0, connection_1.dbConnection)();
-        this.middlewares();
-        this.routes();
+        (0, connection_1.dbConnection)(); //conectar con mongoose//
+        this.middlewares(); // agregar seguridad//
+        this.routes(); //agregar rutas // 
     }
     miPrimeraApi() {
         this.app.get("/", (req, res) => res.status(200).json({ msg: "información" }));
     }
     middlewares() {
-        this.app.use(express_1.default.json());
+        this.app.use(express_1.default.json()); // todo lo conviere a json // 
         this.miPrimeraApi();
     }
     routes() {
