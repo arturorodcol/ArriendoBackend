@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoose_1 = require("mongoose");
+// Nombre arrendatarios// 
 //nuevo Schema inmuebleArrendado
 const ClienteSchema = new mongoose_1.Schema({
     nombre: { type: String, required: true },

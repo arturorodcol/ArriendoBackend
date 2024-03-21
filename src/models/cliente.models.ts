@@ -1,5 +1,7 @@
 import { Model, Schema, model } from "mongoose";
 
+// Nombre arrendatarios// 
+
 //nuevo Schema inmuebleArrendado
 
 const ClienteSchema = new Schema ({
