@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import { dbConnection } from "./database/connection";
 import clienteRoutes from "./routes/cliente.route";
 import usuarioRoutes from "./routes/usuario.route";
+import inmuebleRoutes from "./routes/inmueble.route";
 
 
 class Server{
@@ -9,7 +10,8 @@ private app: Application;
 private port: string;
 private apiPaths = {
     cliente: "/api/v1/cliente/",
-    usuario: "/api/v1/usuario/", 
+    usuario: "/api/v1/usuario/",
+    inmueble: "/api/v1/inmueble/", 
 };
 
     constructor(){
@@ -35,6 +37,7 @@ private apiPaths = {
     routes(): void{
         this.app.use(this.apiPaths.cliente, clienteRoutes );
         this.app.use(this.apiPaths.usuario, usuarioRoutes );
+        this.app.use(this.apiPaths.inmueble, inmuebleRoutes);
     }
 
     listen(): void {
