@@ -8,12 +8,14 @@ const connection_1 = require("./database/connection");
 const cliente_route_1 = __importDefault(require("./routes/cliente.route"));
 const usuario_route_1 = __importDefault(require("./routes/usuario.route"));
 const inmueble_route_1 = __importDefault(require("./routes/inmueble.route"));
+const auth_route_1 = __importDefault(require("./routes/auth.route"));
 class Server {
     constructor() {
         this.apiPaths = {
             cliente: "/api/v1/cliente/",
             usuario: "/api/v1/usuario/",
             inmueble: "/api/v1/inmueble/",
+            auth: "/api/v1/auth/",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "3000";
@@ -32,6 +34,7 @@ class Server {
         this.app.use(this.apiPaths.cliente, cliente_route_1.default);
         this.app.use(this.apiPaths.usuario, usuario_route_1.default);
         this.app.use(this.apiPaths.inmueble, inmueble_route_1.default);
+        this.app.use(this.apiPaths.auth, auth_route_1.default);
     }
     listen() {
         this.app.listen(this.port, () => {

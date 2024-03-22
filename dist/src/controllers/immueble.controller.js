@@ -16,10 +16,9 @@ exports.getInmuebles = exports.crearImmueble = void 0;
 const inmueble_models_1 = __importDefault(require("../models/inmueble.models"));
 const crearImmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    // const id = req._id; // Cuanto implementemos token
+    const id = req; //rep._id problema integrar con validateJWT
     try {
-        // const inmuebleNuevo = new InmuebleModel({ usuario: id, ...body }); //Cuanto implementemos token
-        const inmuebleNuevo = new inmueble_models_1.default(Object.assign({}, body));
+        const inmuebleNuevo = new inmueble_models_1.default(Object.assign({ usuario: id }, body));
         const inmuebleCreado = yield inmuebleNuevo.save();
         res.status(200).json({
             ok: true,

@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import InmuebleModel from "../models/inmueble.models";
+import { CustomRequest } from "../middlewares/validate-jwt";
+
 
 export const crearImmueble = async (req: Request, res: Response ) => {
     const {body} = req;
-    // const id = req._id; // Cuanto implementemos token
+    const id = req; //rep._id problema integrar con validateJWT
 
     try { 
-        // const inmuebleNuevo = new InmuebleModel({ usuario: id, ...body }); //Cuanto implementemos token
-        const inmuebleNuevo = new InmuebleModel({...body });
+
+        const inmuebleNuevo = new InmuebleModel({ usuario: id, ...body });
         const inmuebleCreado = await inmuebleNuevo.save();
 
         res.status(200).json({
