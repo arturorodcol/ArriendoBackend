@@ -25,6 +25,6 @@ const generateJWT = (
             }
         );
     });
-}
+};
 
 export default generateJWT;

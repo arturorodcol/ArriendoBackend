@@ -12,11 +12,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getInmuebles = exports.crearImmueble = void 0;
+exports.actualizarImmueble = exports.getInmuebles = exports.crearImmueble = void 0;
 const inmueble_models_1 = __importDefault(require("../models/inmueble.models"));
 const crearImmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    const id = req; //rep._id problema integrar con validateJWT
+    const id = req._id; //rep._id problema integrar con validateJWT
     try {
         const inmuebleNuevo = new inmueble_models_1.default(Object.assign({ usuario: id }, body));
         const inmuebleCreado = yield inmuebleNuevo.save();
@@ -38,10 +38,7 @@ const crearImmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* 
 exports.crearImmueble = crearImmueble;
 const getInmuebles = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const inmuebles = yield inmueble_models_1.default.find().populate({
-            path: "usuario",
-            select: "nombre numeroDocumento email",
-        });
+        const inmuebles = yield inmueble_models_1.default.find();
         res.json({
             ok: true,
             inmuebles,
@@ -55,4 +52,23 @@ const getInmuebles = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getInmuebles = getInmuebles;
+const actualizarImmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { body } = req;
+    const id = req._id;
+    try {
+        const update = Object.assign(Object.assign({}, body), { updateAd: new Date() }); // justo antes de actualización, actualiza body y agrego fecha de ese momento
+        const actualizarImmueble = yield inmueble_models_1.default.findByIdAndUpdate(id, body, { new: true });
+        res.status(200).json({
+            ok: true,
+            actualizarImmueble,
+        });
+    }
+    catch (error) {
+        res.status(400).json({
+            ok: false,
+            error,
+        });
+    }
+});
+exports.actualizarImmueble = actualizarImmueble;
 //# sourceMappingURL=immueble.controller.js.map

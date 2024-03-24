@@ -40,7 +40,7 @@ private apiPaths = {
         this.app.use(this.apiPaths.cliente, clienteRoutes );
         this.app.use(this.apiPaths.usuario, usuarioRoutes );
         this.app.use(this.apiPaths.inmueble, inmuebleRoutes);
-        this.app.use(this.apiPaths.auth, authRoutes)
+        this.app.use(this.apiPaths.auth, authRoutes);
     }
 
     listen(): void {

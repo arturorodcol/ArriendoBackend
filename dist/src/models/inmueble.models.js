@@ -14,10 +14,12 @@ const ImmuebleSchema = new mongoose_1.Schema({
     ascensor: { type: Boolean },
     porteria: { type: Boolean },
     createdAd: { type: Date, default: Date.now() },
-    estado: { type: Boolean, required: true, default: true },
+    //agregar update  updateAd: { type: Date, default: Date.now() }, -> antes de crearlo, controlador cambiar valor 
+    estado: { type: Boolean, required: true, default: true }, // arrendado 
     ubicacion: { type: Object }, //problema: como hago para inyectar estos datos en postman 
     servicios: { type: Object },
     opiniones: { type: Object },
+    // llamar referencia (modelo usuario)
 });
 const InmuebleModel = (0, mongoose_1.model)("immueble", ImmuebleSchema);
 exports.default = InmuebleModel;

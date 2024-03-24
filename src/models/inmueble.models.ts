@@ -11,6 +11,8 @@ interface Ubicación {
     estrato: string;
 }
 
+// crear interfaz con datos socioeconomicos (Valor arriendo), (Valor servicios), ()
+
 interface Opiniones {
     comentarios: string;
     fecha?: Date;
@@ -38,6 +40,7 @@ interface InmuebleInterface {
     ascensor: boolean;
     porteria: boolean;
     createdAd: Date;
+    // agregar update
     estado: boolean;
     ubicacion: Ubicación;
     servicios: Servicios;
@@ -55,11 +58,13 @@ const ImmuebleSchema = new Schema<InmuebleInterface>({
     ascensor: { type: Boolean }, 
     porteria: { type: Boolean }, 
     createdAd: { type: Date, default: Date.now() }, 
-    estado: { type: Boolean, required: true, default: true }, 
+    //agregar update  updateAd: { type: Date, default: Date.now() }, -> antes de crearlo, controlador cambiar valor 
+    estado: { type: Boolean, required: true, default: true },  // arrendado 
     ubicacion: { type: Object },  //problema: como hago para inyectar estos datos en postman 
     servicios: { type: Object },
     opiniones: { type: Object },
-})
+    // llamar referencia (modelo usuario)
+});
 
 const InmuebleModel: Model<InmuebleInterface> = model<InmuebleInterface>(
   "immueble", 

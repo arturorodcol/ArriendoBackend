@@ -1,14 +1,13 @@
 import { Router } from "express";
 import { check } from "express-validator";
 import { validateFields } from "../middlewares/validate-fields";
-import { crearUsuario } from "../controllers/usuario.controller";
+import { crearUsuario, getUsuarios } from "../controllers/usuario.controller";
 import validateJWT from "../middlewares/validate-jwt";
 
 const router = Router();
 
 router.post(
     "/",
-    validateJWT, //problema: aprece error Token Invalido 
     [    // permite desde express que datos son obligatorios // 
         check("nombre", "El nombre es obligatorio").not().isEmpty(),
         check("email", "El email es obligatorio").not().isEmpty().isEmail(),
@@ -19,5 +18,7 @@ router.post(
         validateFields, 
     ],
     crearUsuario);
+
+    router.get("/", getUsuarios);
 
 export default router;

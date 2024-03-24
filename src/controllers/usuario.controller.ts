@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import UsuarioModel from "../models/usuario.models";
 import bycrypt from "bcryptjs";
+import { CustomRequest } from "../middlewares/validate-jwt";
 
 export const crearUsuario = async (req: Request, res: Response) => {
     const {body} = req;
@@ -42,3 +43,20 @@ export const crearUsuario = async (req: Request, res: Response) => {
         }); 
     }
 };
+
+export const getUsuarios = async (req: Request, res: Response) => {
+    try {
+        const usuarios = await UsuarioModel.find();
+        res.status(200).json({
+            ok: true,
+            usuarios,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al consultar clientes", 
+        });
+    }
+}
+

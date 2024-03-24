@@ -3,9 +3,9 @@ import InmuebleModel from "../models/inmueble.models";
 import { CustomRequest } from "../middlewares/validate-jwt";
 
 
-export const crearImmueble = async (req: Request, res: Response ) => {
+export const crearImmueble = async (req: CustomRequest, res: Response ) => {
     const {body} = req;
-    const id = req; //rep._id problema integrar con validateJWT
+    const id = req._id; //rep._id problema integrar con validateJWT
 
     try { 
 
@@ -29,10 +29,7 @@ export const crearImmueble = async (req: Request, res: Response ) => {
 
 export const getInmuebles = async (req: Request, res: Response) => {
     try {
-        const inmuebles = await InmuebleModel.find().populate({
-            path: "usuario",
-            select: "nombre numeroDocumento email",
-        });
+        const inmuebles = await InmuebleModel.find();
 
         res.json({
             ok: true,
@@ -45,3 +42,24 @@ export const getInmuebles = async (req: Request, res: Response) => {
         });
     }
 };
+
+export const actualizarImmueble = async (req: CustomRequest, res: Response ) => {   //CustomRuquest -> siempre con token (cuando ponga token usarlo)
+    const {body} = req;
+    const id = req._id;
+
+    try {
+        const update = { ...body, updateAd: new Date() }; // justo antes de actualización, actualiza body y agrego fecha de ese momento
+        const actualizarImmueble = await InmuebleModel.findByIdAndUpdate(id, body, {new: true});
+        res.status(200).json({
+            ok: true,
+            actualizarImmueble,
+        });
+    } catch (error) {
+        res.status(400).json({
+            ok: false,
+            error,
+        });
+    }
+
+    
+}

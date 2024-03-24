@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.crearUsuario = void 0;
+exports.getUsuarios = exports.crearUsuario = void 0;
 const usuario_models_1 = __importDefault(require("../models/usuario.models"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -49,4 +49,21 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.crearUsuario = crearUsuario;
+const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const usuarios = yield usuario_models_1.default.find();
+        res.status(200).json({
+            ok: true,
+            usuarios,
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al consultar clientes",
+        });
+    }
+});
+exports.getUsuarios = getUsuarios;
 //# sourceMappingURL=usuario.controller.js.map
