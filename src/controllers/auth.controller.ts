@@ -53,7 +53,7 @@ export const renewToken = async (req: CustomRequest, res: Response) => {
 
         const usuario = await UsuarioModel.findById(id);
 
-        const token = await generateJWT(id.toString());
+        const token = await generateJWT(id.toString(), "1H");
 
         res.json({
             ok: true,
@@ -110,6 +110,46 @@ export const olvidoContrasena = async (req: Request, res: Response) => {
             ok: false,
             error,
             msg: "Problemas con la validacion, por favor comuniquese con el administrador",
+        });
+    }
+}; 
+
+export const cambiarContraseña = async (req: CustomRequest, res: Response) => {
+    
+    const id = req._id;
+    const { password } = req.body;
+
+    try {
+console.log(password)
+        if (!password){
+            res.status(401).json({
+                ok: false,
+                msg: "contraseña invalida, dígite nuevamente",
+            });
+        }
+        
+        const newPassword = bcrypt.hashSync(password, 10);
+        const actalizarPassword = await UsuarioModel.findOneAndUpdate({
+            _id: id,
+            password: newPassword,
+        });
+
+        if(!actalizarPassword) {
+            res.status(401).json({
+                ok: false,
+                msg: "Error al actualizar contraseña",
+            });
+        }
+
+        res.status(200).json({
+            ok: true,
+            msg: "contraseña actualizada con exito",
+        });
+
+    } catch (error) {
+        res.status(401).json({
+            ok: false,
+            msg: "Error al actualizar contraseña",
         });
     }
 }; 

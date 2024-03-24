@@ -60,3 +60,80 @@ export const getUsuarios = async (req: Request, res: Response) => {
     }
 }
 
+export const getUnUsuario = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        console.log(id);
+
+        const usuario = await UsuarioModel.findById({_id: id}); // que voy a buscar //
+        res.status(200).json({
+            ok: true,
+            usuario,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al consultar usuario", 
+        });
+    }
+}
+
+export const actualizarUsuario = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        const { body } = req; //recuperar la información del modelo//
+
+        const UsuarioActualizado = await UsuarioModel.findByIdAndUpdate(id, body, {new: true}); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
+        res.status(200).json({
+            ok: true,
+            usuario: UsuarioActualizado, 
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al actualizar usuario", 
+        });
+    }
+}
+
+export const actualizarEstadoUsuario = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        const { body } = req; //recuperar la información del modelo// 
+
+        const usuarioEstadoActualizado = await UsuarioModel.findByIdAndUpdate( id, 
+                { estado: false}, 
+                {new: true}); 
+            res.status(200).json({
+            ok: true,
+            usuario: usuarioEstadoActualizado, 
+            });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al actualizar usuario", 
+        });
+    }
+}
+
+export const eliminarUsuarios = async (req: Request, res: Response) => {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+
+        const eliminarUsuario = await UsuarioModel.findByIdAndDelete(id); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
+        res.status(200).json({
+            ok: true,
+            usuario: eliminarUsuario, 
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al eliminar usuario", 
+        });
+    }
+}
+

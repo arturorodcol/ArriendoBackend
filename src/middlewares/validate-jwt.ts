@@ -19,9 +19,10 @@ const validateJWT = (req: CustomRequest, res: Response, next: NextFunction) => {
 
     try {
       console.log("Estoy dentro del token", token);
-        const { _id } = jwt.verify(token, process.env.JWT_SECRET );
+        const { _id } = jwt.verify(token, process.env.JWT_SECRET_PASS );
         req._id = _id;
         next();
+
     } catch (error) {
         return res.status(401).json({
             ok: false,

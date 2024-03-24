@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUsuarios = exports.crearUsuario = void 0;
+exports.eliminarUsuarios = exports.actualizarEstadoUsuario = exports.actualizarUsuario = exports.getUnUsuario = exports.getUsuarios = exports.crearUsuario = void 0;
 const usuario_models_1 = __importDefault(require("../models/usuario.models"));
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -66,4 +66,79 @@ const getUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     }
 });
 exports.getUsuarios = getUsuarios;
+const getUnUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        console.log(id);
+        const usuario = yield usuario_models_1.default.findById({ _id: id }); // que voy a buscar //
+        res.status(200).json({
+            ok: true,
+            usuario,
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al consultar usuario",
+        });
+    }
+});
+exports.getUnUsuario = getUnUsuario;
+const actualizarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        const { body } = req; //recuperar la información del modelo//
+        const UsuarioActualizado = yield usuario_models_1.default.findByIdAndUpdate(id, body, { new: true }); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
+        res.status(200).json({
+            ok: true,
+            usuario: UsuarioActualizado,
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al actualizar usuario",
+        });
+    }
+});
+exports.actualizarUsuario = actualizarUsuario;
+const actualizarEstadoUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        const { body } = req; //recuperar la información del modelo// 
+        const usuarioEstadoActualizado = yield usuario_models_1.default.findByIdAndUpdate(id, { estado: false }, { new: true });
+        res.status(200).json({
+            ok: true,
+            usuario: usuarioEstadoActualizado,
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al actualizar usuario",
+        });
+    }
+});
+exports.actualizarEstadoUsuario = actualizarEstadoUsuario;
+const eliminarUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const id = req.params.id; //busqueda espeficica //
+        const eliminarUsuario = yield usuario_models_1.default.findByIdAndDelete(id); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
+        res.status(200).json({
+            ok: true,
+            usuario: eliminarUsuario,
+        });
+    }
+    catch (error) {
+        console.log(error);
+        res.status(400).json({
+            ok: true,
+            msg: "Error al eliminar usuario",
+        });
+    }
+});
+exports.eliminarUsuarios = eliminarUsuarios;
 //# sourceMappingURL=usuario.controller.js.map

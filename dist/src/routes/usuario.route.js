@@ -15,5 +15,9 @@ router.post("/", [
     validate_fields_1.validateFields,
 ], usuario_controller_1.crearUsuario);
 router.get("/", usuario_controller_1.getUsuarios);
+router.get("/:id", usuario_controller_1.getUnUsuario);
+router.put("/:id", usuario_controller_1.actualizarUsuario);
+router.put("/estado/:id", usuario_controller_1.actualizarEstadoUsuario);
+router.delete("/:id", usuario_controller_1.eliminarUsuarios);
 exports.default = router;
 //# sourceMappingURL=usuario.route.js.map
