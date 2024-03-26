@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.cambiarContraseña = exports.olvidoContrasena = exports.renewToken = exports.login = void 0;
+exports.cambiarContrasena = exports.olvidoContrasena = exports.renewToken = exports.login = void 0;
 const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const usuario_models_1 = __importDefault(require("../models/usuario.models"));
 const jwt_1 = __importDefault(require("../helpers/jwt"));
@@ -51,6 +51,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.login = login;
 const renewToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req._id;
+    console.log("este es el id de renover token", id);
     try {
         if (typeof id === "undefined") {
             throw new Error("No existe un id");
@@ -74,11 +75,11 @@ const renewToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
 });
 exports.renewToken = renewToken;
 const olvidoContrasena = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { login, email } = req.body;
+    const { login, numeroDocumento } = req.body;
     try {
         const usuarioRegistrado = yield usuario_models_1.default.findOne({
-            login,
-            email,
+            login: login,
+            numeroDocumento: numeroDocumento,
         });
         if (!usuarioRegistrado) {
             return res.status(401).json({
@@ -106,11 +107,11 @@ const olvidoContrasena = (req, res) => __awaiter(void 0, void 0, void 0, functio
     }
 });
 exports.olvidoContrasena = olvidoContrasena;
-const cambiarContraseña = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const cambiarContrasena = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req._id;
     const { password } = req.body;
     try {
-        console.log(password);
+        console.log("este es el ID y Password de cambiar contrasela", id, password);
         if (!password) {
             res.status(401).json({
                 ok: false,
@@ -118,7 +119,7 @@ const cambiarContraseña = (req, res) => __awaiter(void 0, void 0, void 0, funct
             });
         }
         const newPassword = bcryptjs_1.default.hashSync(password, 10);
-        const actalizarPassword = yield usuario_models_1.default.findOneAndUpdate({
+        const actalizarPassword = yield usuario_models_1.default.findByIdAndUpdate({
             _id: id,
             password: newPassword,
         });
@@ -140,5 +141,5 @@ const cambiarContraseña = (req, res) => __awaiter(void 0, void 0, void 0, funct
         });
     }
 });
-exports.cambiarContraseña = cambiarContraseña;
+exports.cambiarContrasena = cambiarContrasena;
 //# sourceMappingURL=auth.controller.js.map

@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 const connection_1 = require("./database/connection");
 const usuario_route_1 = __importDefault(require("./routes/usuario.route"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {
         this.apiPaths = {
@@ -27,6 +28,7 @@ class Server {
         this.miPrimeraApi();
     }
     routes() {
+        this.app.use((0, cors_1.default)()); //permisos para consumir api
         this.app.use(this.apiPaths.usuario, usuario_route_1.default);
         this.app.use(this.apiPaths.auth, auth_route_1.default);
     }

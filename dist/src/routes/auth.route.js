@@ -37,12 +37,12 @@ router.post("/", [
 router.get("/", validate_jwt_1.default, auth_controller_1.renewToken);
 router.post("/olvidocontrasena", [
     (0, express_validator_1.check)("login", "El login es obligatorio").not().isEmpty(),
-    (0, express_validator_1.check)("email", "El email es obligatorio").not().isEmpty(),
+    (0, express_validator_1.check)("numeroDocumento", "El número de documento es obligatorio").not().isEmpty(),
     validate_fields_1.validateFields,
 ], auth_controller_1.olvidoContrasena);
-router.put("/cambio", validate_jwt_1.validateJWTpass, [
+router.put("/cambiocontrasena", validate_jwt_1.validateJWTPass, [
     (0, express_validator_1.check)("password", "el password es obligatorio").not().isEmpty,
     validate_fields_1.validateFields,
-], auth_controller_1.cambiarContraseña);
+], auth_controller_1.cambiarContrasena);
 exports.default = router;
 //# sourceMappingURL=auth.route.js.map

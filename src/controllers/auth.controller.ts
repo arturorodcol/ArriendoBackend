@@ -45,6 +45,7 @@ export const login = async (req: Request, res: Response) => {
 export const renewToken = async (req: CustomRequest, res: Response) => {
 
     const id = req._id;
+    console.log("este es el id de renover token", id);
     try {
 
         if (typeof id === "undefined") {
@@ -71,12 +72,12 @@ export const renewToken = async (req: CustomRequest, res: Response) => {
 };
 
 export const olvidoContrasena = async (req: Request, res: Response) => {
-    const { login, email } = req.body;
+    const { login, numeroDocumento } = req.body;
 
     try {
         const usuarioRegistrado = await UsuarioModel.findOne({ 
-            login,
-            email,
+            login: login,
+            numeroDocumento: numeroDocumento,
         });
 
         if (!usuarioRegistrado) {
@@ -114,13 +115,13 @@ export const olvidoContrasena = async (req: Request, res: Response) => {
     }
 }; 
 
-export const cambiarContraseña = async (req: CustomRequest, res: Response) => {
+export const cambiarContrasena = async (req: CustomRequest, res: Response) => {
     
     const id = req._id;
     const { password } = req.body;
 
     try {
-console.log(password)
+    console.log("este es el ID y Password de cambiar contrasela", id, password);
         if (!password){
             res.status(401).json({
                 ok: false,
@@ -129,7 +130,8 @@ console.log(password)
         }
         
         const newPassword = bcrypt.hashSync(password, 10);
-        const actalizarPassword = await UsuarioModel.findOneAndUpdate({
+
+        const actalizarPassword = await UsuarioModel.findByIdAndUpdate({
             _id: id,
             password: newPassword,
         });

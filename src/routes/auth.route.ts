@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { validateFields } from "../middlewares/validate-fields";
-import { cambiarContraseña, login, olvidoContrasena, renewToken } from "../controllers/auth.controller";
+import { cambiarContrasena, login, olvidoContrasena, renewToken } from "../controllers/auth.controller";
 import { check } from "express-validator";
-import validateJWT, { validateJWTpass } from "../middlewares/validate-jwt";
+import validateJWT, { validateJWTPass } from "../middlewares/validate-jwt";
 
 const router = Router();
 
@@ -22,19 +22,19 @@ router.post(
     "/olvidocontrasena",
     [   
         check("login", "El login es obligatorio").not().isEmpty(),
-        check("email", "El email es obligatorio").not().isEmpty(),
+        check("numeroDocumento", "El número de documento es obligatorio").not().isEmpty(),
         validateFields, 
     ],
     olvidoContrasena
     );
 
 router.put(
-    "/cambio",
-    validateJWTpass,
+    "/cambiocontrasena",
+    validateJWTPass,
     [
         check("password", "el password es obligatorio").not().isEmpty,
         validateFields,
     ], 
-    cambiarContraseña);
+    cambiarContrasena);
 
 export default router;

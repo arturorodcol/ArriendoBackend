@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import { dbConnection } from "./database/connection";
 import usuarioRoutes from "./routes/usuario.route";
 import authRoutes from "./routes/auth.route";
+import cors from "cors";
 
 
 class Server{
@@ -33,6 +34,8 @@ private apiPaths = {
     }
 
     routes(): void{
+        this.app.use(cors()); //permisos para consumir api
+        
         this.app.use(this.apiPaths.usuario, usuarioRoutes );
         this.app.use(this.apiPaths.auth, authRoutes);
     }
