@@ -32,7 +32,7 @@ router.put(
     "/cambiocontrasena",
     validateJWTPass,
     [
-        check("password", "el password es obligatorio").not().isEmpty,
+        check("password", "el password es obligatorio").not().isEmpty(),
         validateFields,
     ], 
     cambiarContrasena);

@@ -25,7 +25,6 @@ const validateJWT = (req, res, next) => {
         });
     }
 };
-exports.default = validateJWT;
 const validateJWTPass = (req, res, next) => {
     const token = req.header("x-token-pass");
     if (!token) {
@@ -47,4 +46,5 @@ const validateJWTPass = (req, res, next) => {
     }
 };
 exports.validateJWTPass = validateJWTPass;
+exports.default = validateJWT;
 //# sourceMappingURL=validate-jwt.js.map

@@ -73,31 +73,25 @@ export const renewToken = async (req: CustomRequest, res: Response) => {
 
 export const olvidoContrasena = async (req: Request, res: Response) => {
     const { login, numeroDocumento } = req.body;
-
     try {
         const usuarioRegistrado = await UsuarioModel.findOne({ 
             login: login,
             numeroDocumento: numeroDocumento,
         });
-
         if (!usuarioRegistrado) {
             return res.status(401).json({
                 ok: false,
                 msg: "Credenciales no válidas",
             });
         }
-
         const id = usuarioRegistrado?._id;
-
         if (id) {
-
             const token = await generateJWT(
                 id,
                 login,
                 "1H",
                 process.env.JWT_SECRET_PASS
                 );
-
             return res.status(200).json({
                 ok: true,
                 msg: "Exitoso",
@@ -105,7 +99,6 @@ export const olvidoContrasena = async (req: Request, res: Response) => {
                 token,
             });
         }
-
     } catch (error) {
         res.status(400).json({
             ok: false,
