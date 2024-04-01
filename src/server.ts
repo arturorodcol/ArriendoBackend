@@ -2,6 +2,7 @@ import express, { Application, Request, Response } from "express";
 import { dbConnection } from "./database/connection";
 import usuarioRoutes from "./routes/usuario.route";
 import authRoutes from "./routes/auth.route";
+import inmuebleRoutes from "./routes/auth.route";
 import cors from "cors";
 
 
@@ -10,7 +11,8 @@ private app: Application;
 private port: string;
 private apiPaths = {
     usuario: "/api/v1/usuario/",
-    auth: "/api/v1/auth/", 
+    auth: "/api/v1/auth/",
+    inmueble: "/api/v1/inmueble/",
 };
 
     constructor(){
@@ -38,6 +40,7 @@ private apiPaths = {
         
         this.app.use(this.apiPaths.usuario, usuarioRoutes );
         this.app.use(this.apiPaths.auth, authRoutes);
+        this.app.use(this.apiPaths.inmueble, inmuebleRoutes); 
     }
 
     listen(): void {

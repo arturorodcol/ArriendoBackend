@@ -8,6 +8,7 @@ const router = Router();
 
 router.post(
     "/",
+    validateJWT,
     [    // permite desde express que datos son obligatorios // 
         check("nombre", "El nombre es obligatorio").not().isEmpty(),
         check("email", "El email es obligatorio").not().isEmpty().isEmail(),
@@ -19,10 +20,10 @@ router.post(
     ],
     crearUsuario);
 
-    router.get("/", getUsuarios);
-    router.get("/:id", getUnUsuario);
-    router.put("/:id", actualizarUsuario);
-    router.put("/estado/:id", actualizarEstadoUsuario)
-    router.delete("/:id", eliminarUsuarios);
+    router.get("/", validateJWT, getUsuarios);
+    router.get("/:id", validateJWT, getUnUsuario);
+    router.put("/:id", validateJWT, actualizarUsuario);
+    router.put("/estado/:id", validateJWT, actualizarEstadoUsuario)
+    router.delete("/:id", validateJWT, eliminarUsuarios);
 
 export default router;

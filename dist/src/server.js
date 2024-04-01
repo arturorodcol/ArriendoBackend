@@ -7,12 +7,14 @@ const express_1 = __importDefault(require("express"));
 const connection_1 = require("./database/connection");
 const usuario_route_1 = __importDefault(require("./routes/usuario.route"));
 const auth_route_1 = __importDefault(require("./routes/auth.route"));
+const auth_route_2 = __importDefault(require("./routes/auth.route"));
 const cors_1 = __importDefault(require("cors"));
 class Server {
     constructor() {
         this.apiPaths = {
             usuario: "/api/v1/usuario/",
             auth: "/api/v1/auth/",
+            inmueble: "/api/v1/inmueble/",
         };
         this.app = (0, express_1.default)();
         this.port = process.env.PORT || "3000";
@@ -31,6 +33,7 @@ class Server {
         this.app.use((0, cors_1.default)()); //permisos para consumir api
         this.app.use(this.apiPaths.usuario, usuario_route_1.default);
         this.app.use(this.apiPaths.auth, auth_route_1.default);
+        this.app.use(this.apiPaths.inmueble, auth_route_2.default);
     }
     listen() {
         this.app.listen(this.port, () => {
