@@ -2,7 +2,7 @@ import express, { Application, Request, Response } from "express";
 import { dbConnection } from "./database/connection";
 import usuarioRoutes from "./routes/usuario.route";
 import authRoutes from "./routes/auth.route";
-import inmuebleRoutes from "./routes/auth.route";
+import inmuebleRoutes from "./routes/inmueble.route";
 import cors from "cors";
 
 
