@@ -45,7 +45,6 @@ export const login = async (req: Request, res: Response) => {
 export const renewToken = async (req: CustomRequest, res: Response) => {
 
     const id = req._id;
-    console.log("este es el id de renover token", id);
     try {
 
         if (typeof id === "undefined") {
@@ -114,7 +113,6 @@ export const cambiarContrasena = async (req: CustomRequest, res: Response) => {
     const { password } = req.body;
 
     try {
-    console.log("este es el ID y Password de cambiar contrasela", id, password);
         if (!password){
             res.status(401).json({
                 ok: false,

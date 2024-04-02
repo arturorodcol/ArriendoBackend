@@ -2,28 +2,33 @@ import { Router } from "express";
 import { check } from "express-validator";
 import validateJWT from "../middlewares/validate-jwt";
 import { validateFields } from "../middlewares/validate-fields";
-import { consultarInmueble, crearInmueble, eliminarInmueble, } from "../controllers/inmueble.controller";
+import { 
+    crearInmueble, 
+    consultarInmueble, 
+    eliminarInmueble 
+} from "../controllers/inmueble.controller";
 
 const router = Router();
 
 router.post(
     "/",
-    // validateJWT,
-    // [    // permite desde express que datos son obligatorios // 
-    //     check("tipoInmueble", "El tipoInmueble es obligatorio").not().isEmpty(),
-    //     check("fechaIngreso", "La fecha de ingreso es obligatoria").not().isEmpty(),
-    //     check("fechaPago", "La fecha de pago es obligatoria").not().isEmpty(),
-    //     check("valorPago", "El valor a pagar es obligatorio").not().isEmpty(),
-    //     validateFields, 
-    // ],
+    validateJWT,
+    [    // permite desde express que datos son obligatorios // 
+        check("tipoInmueble", "El tipoInmueble es obligatorio").not().isEmpty(),
+        check("fechaIngreso", "La fecha de ingreso es obligatoria").not().isEmpty(),
+        check("fechaPago", "La fecha de pago es obligatoria").not().isEmpty(),
+        check("valorPago", "El valor a pagar es obligatorio").not().isEmpty(),
+        validateFields, 
+    ],
     crearInmueble);
 
-// router.get(
-//     "/", 
-//     consultarInmueble);
+router.get(
+    "/", 
+    consultarInmueble);
+
 router.delete(
     "/:id",
-    validateJWT, 
+    // validateJWT, 
     eliminarInmueble);
 
 export default router;

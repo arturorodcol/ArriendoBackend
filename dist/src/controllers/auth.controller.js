@@ -51,7 +51,6 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
 exports.login = login;
 const renewToken = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req._id;
-    console.log("este es el id de renover token", id);
     try {
         if (typeof id === "undefined") {
             throw new Error("No existe un id");
@@ -111,7 +110,6 @@ const cambiarContrasena = (req, res) => __awaiter(void 0, void 0, void 0, functi
     const id = req._id;
     const { password } = req.body;
     try {
-        console.log("este es el ID y Password de cambiar contrasela", id, password);
         if (!password) {
             res.status(401).json({
                 ok: false,

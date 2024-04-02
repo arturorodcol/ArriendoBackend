@@ -38,7 +38,7 @@ private apiPaths = {
     routes(): void{
         this.app.use(cors()); //permisos para consumir api
         
-        this.app.use(this.apiPaths.usuario, usuarioRoutes );
+        this.app.use(this.apiPaths.usuario, usuarioRoutes);
         this.app.use(this.apiPaths.auth, authRoutes);
         this.app.use(this.apiPaths.inmueble, inmuebleRoutes); 
     }
@@ -49,4 +49,4 @@ private apiPaths = {
         });
     }
 }
-export default Server;
+export default Server; 

@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 const validateJWT = (req, res, next) => {
     const token = req.header("x-token");
     if (!token) {
-        console.log("Estoy en if !token");
         return res.status(401).json({
             ok: false,
             msg: "No hay token en la petición",
@@ -13,7 +12,6 @@ const validateJWT = (req, res, next) => {
     }
     ;
     try {
-        console.log("Estoy dentro del token", token);
         const { _id } = jwt.verify(token, process.env.JWT_SECRET);
         req._id = _id;
         next();

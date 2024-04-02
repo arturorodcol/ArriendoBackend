@@ -15,11 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarInmueble = exports.consultarInmueble = exports.crearInmueble = void 0;
 const inmueble_models_1 = __importDefault(require("../models/inmueble.models"));
 const crearInmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { body } = req;
-    const id = req._id;
-    console.log("controlador");
     try {
-        const inmuebleNuevo = new inmueble_models_1.default(Object.assign({ usuario: id }, body));
+        const inmuebleNuevo = new inmueble_models_1.default();
         const inmuebleCreado = yield inmuebleNuevo.save();
         res.status(200).json({
             ok: true,

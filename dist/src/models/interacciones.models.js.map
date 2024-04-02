@@ -1,1 +1,1 @@
-{"version":3,"file":"interacciones.models.js","sourceRoot":"","sources":["../../../src/models/interacciones.models.ts"],"names":[],"mappings":""}
+{"version":3,"file":"interacciones.models.js","sourceRoot":"","sources":["../../../src/models/interacciones.models.ts"],"names":[],"mappings":";;AAAA,uCAAkC;AAElC,MAAM,iBAAiB,GAAG,IAAI,iBAAM,CAAE;IAClC,MAAM,EAAE,EAAE,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,IAAI,EAAC;IACvC,KAAK,EAAE,EAAE,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,IAAI,EAAC;IACtC,OAAO,EAAE,EAAE,IAAI,EAAE,MAAM,EAAE,QAAQ,EAAE,IAAI,EAAC;CAC3C,CAAC,CAAC"}

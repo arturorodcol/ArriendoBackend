@@ -1,15 +1,11 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { CustomRequest } from "../middlewares/validate-jwt";
 import InmuebleModel from "../models/inmueble.models";
 
-export const crearInmueble = async (req: CustomRequest, res: Response) => {
-    const { body } = req;
-    const id = req._id;
-    console.log("controlador"); 
-
+export const crearInmueble = async (req: Request, res: Response) => {
     try { 
 
-        const inmuebleNuevo = new InmuebleModel({ usuario: id, ...body});
+        const inmuebleNuevo = new InmuebleModel();
         const inmuebleCreado = await inmuebleNuevo.save();
 
         res.status(200).json({
@@ -62,6 +58,4 @@ export const eliminarInmueble = async (req: CustomRequest, res: Response) => {
         msg: `Error al eliminar inmueble`,
       });
     }
-  };
-  
-
+};
