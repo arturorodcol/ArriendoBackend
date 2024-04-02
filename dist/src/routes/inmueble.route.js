@@ -16,5 +16,8 @@ router.get("/", inmueble_controller_1.consultarInmueble);
 router.delete("/:id", 
 // validateJWT, 
 inmueble_controller_1.eliminarInmueble);
+router.put("/:id", 
+// validateJWT, 
+inmueble_controller_1.actualizarInmueble);
 exports.default = router;
 //# sourceMappingURL=inmueble.route.js.map
