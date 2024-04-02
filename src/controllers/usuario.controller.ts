@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import UsuarioModel from "../models/usuario.models";
 import bycrypt from "bcryptjs";
-import { CustomRequest } from "../middlewares/validate-jwt";
+
 
 export const crearUsuario = async (req: Request, res: Response) => {
     const {body} = req;
