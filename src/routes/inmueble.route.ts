@@ -12,13 +12,12 @@ const router = Router();
 
 router.post(
     "/",
-    validateJWT,
     [    // permite desde express que datos son obligatorios // 
         check("tipoInmueble", "El tipoInmueble es obligatorio").not().isEmpty(),
-        check("fechaIngreso", "La fecha de ingreso es obligatoria").not().isEmpty(),
-        check("fechaPago", "La fecha de pago es obligatoria").not().isEmpty(),
+         check("fechaIngreso", "La fecha de ingreso es obligatoria").not().isEmpty(),
+         check("fechaPago", "La fecha de pago es obligatoria").not().isEmpty(),
         check("valorPago", "El valor a pagar es obligatorio").not().isEmpty(),
-        validateFields, 
+         validateFields, 
     ],
     crearInmueble);
 
