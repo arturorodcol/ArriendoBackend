@@ -8,7 +8,7 @@ const InmuebleSchema = new Schema ({
     estado: { type: String, required: true, default: "disponible" },
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() }, 
-    usuario: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true }
+    usuario: { type: Schema.Types.ObjectId, ref: 'usuario', required: true }
 });
 
 const InmuebleModel: Model<any> = model("Inmueble", InmuebleSchema);

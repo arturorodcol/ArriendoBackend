@@ -9,7 +9,7 @@ const InmuebleSchema = new mongoose_1.Schema({
     estado: { type: String, required: true, default: "disponible" },
     createdAt: { type: Date, default: Date.now() },
     updatedAt: { type: Date, default: Date.now() },
-    usuario: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Usuario', required: true }
+    usuario: { type: mongoose_1.Schema.Types.ObjectId, ref: 'usuario', required: true }
 });
 const InmuebleModel = (0, mongoose_1.model)("Inmueble", InmuebleSchema);
 exports.default = InmuebleModel;
