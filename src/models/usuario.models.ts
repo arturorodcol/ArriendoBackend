@@ -15,5 +15,5 @@ const UsuarioSchema = new Schema ({
     createdAt: { type: Date, default: Date.now },
 });
 //model "NOMBRE DE BASE DE DATOS EN MONGOOSE"
-const UsuarioModel: Model<any> = model("usuario", UsuarioSchema);
+const UsuarioModel: Model<any> = model("Usuario", UsuarioSchema);
 export default UsuarioModel; 
