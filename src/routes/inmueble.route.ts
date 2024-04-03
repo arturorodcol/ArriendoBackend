@@ -5,7 +5,8 @@ import { validateFields } from "../middlewares/validate-fields";
 import { 
     crearInmueble, 
     consultarInmueble, 
-    eliminarInmueble 
+    eliminarInmueble, 
+    actualizarInmueble
 } from "../controllers/inmueble.controller";
 
 const router = Router();
@@ -29,5 +30,10 @@ router.delete(
     "/:id",
     // validateJWT, 
     eliminarInmueble);
+
+router.put(
+    "/:id",
+    // validateJWT, 
+actualizarInmueble);
 
 export default router;

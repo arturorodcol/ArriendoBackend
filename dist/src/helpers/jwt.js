@@ -7,6 +7,7 @@ const generateJWT = (_id, login = "", expiresIn = process.env.EXPIRES_IN, jwtSec
             _id,
             login,
         };
+        console.log("this is", payload);
         jwt.sign(payload, jwtSecret, {
             expiresIn: expiresIn,
         }, (error, token) => {

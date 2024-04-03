@@ -11,6 +11,7 @@ const generateJWT = (
             _id,
             login,
         };
+        console.log("this is", payload);
         jwt.sign(
             payload,
             jwtSecret, 
