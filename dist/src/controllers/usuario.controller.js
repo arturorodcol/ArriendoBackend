@@ -85,10 +85,12 @@ const getUnUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     }
 });
 exports.getUnUsuario = getUnUsuario;
+// no validamos con CustomRequest pero en route valido token 
 const actualizarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const id = req.params.id; //busqueda espeficica //
         const { body } = req; //recuperar la información del modelo//
+        //if(si existe el id entonces que haga actualización, sino, error "usuario no existe")
         const UsuarioActualizado = yield usuario_models_1.default.findByIdAndUpdate(id, body, { new: true }); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
         res.status(200).json({
             ok: true,
@@ -98,7 +100,7 @@ const actualizarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, functi
     catch (error) {
         console.log(error);
         res.status(400).json({
-            ok: true,
+            ok: false,
             msg: "Error al actualizar usuario",
         });
     }

@@ -79,10 +79,13 @@ export const getUnUsuario = async (req: Request, res: Response) => {
     }
 }
 
+// no validamos con CustomRequest pero en route valido token 
 export const actualizarUsuario = async (req: Request, res: Response) => {
     try {
         const id = req.params.id; //busqueda espeficica //
         const { body } = req; //recuperar la información del modelo//
+
+        //if(si existe el id entonces que haga actualización, sino, error "usuario no existe")
 
         const UsuarioActualizado = await UsuarioModel.findByIdAndUpdate(id, body, {new: true}); // actualizar recibe tres parametros id, info que envio y revolución de lo que actualize //
         res.status(200).json({
@@ -92,7 +95,7 @@ export const actualizarUsuario = async (req: Request, res: Response) => {
     } catch (error) {
         console.log(error);
         res.status(400).json({
-            ok: true,
+            ok: false,
             msg: "Error al actualizar usuario", 
         });
     }
