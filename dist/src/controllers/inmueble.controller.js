@@ -14,16 +14,50 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.actualizarInmueble = exports.eliminarInmueble = exports.consultarInmueble = exports.crearInmueble = void 0;
 const inmueble_models_1 = __importDefault(require("../models/inmueble.models"));
+const usuario_models_1 = __importDefault(require("../models/usuario.models"));
 const crearInmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body } = req;
-    const id = req._id;
+    const idUsuario = body.usuario; // Suponiendo que el ID del usuario se envía en el cuerpo de la solicitud como 'usuario'
     try {
-        const inmuebleNuevo = new inmueble_models_1.default(Object.assign({ usuario: id }, body));
+        // Verificar si el usuario existe
+        const usuario = yield usuario_models_1.default.findById(idUsuario);
+        if (!usuario) {
+            return res.status(404).json({
+                ok: false,
+                msg: "Usuario no encontrado",
+            });
+        }
+        // solo se agrega con arrendatario
+        if (usuario.rol !== 'ARRENDATARIO') {
+            return res.status(403).json({
+                ok: false,
+                msg: "Unicamente se asocian inmuebles a los arrendatarios y eres ADMIN.",
+            });
+        }
+        // aca verificamos que no este asociado 
+        const inmuebleExistente = yield inmueble_models_1.default.findOne({ usuario: idUsuario });
+        if (inmuebleExistente) {
+            return res.status(400).json({
+                ok: false,
+                msg: "El usuario ya tiene un inmueble asociado",
+            });
+        }
+        // Verificar si ya existe un inmueble con el mismo tipo
+        const inmuebleTipoExistente = yield inmueble_models_1.default.findOne({ tipoInmueble: body.tipoInmueble });
+        if (inmuebleTipoExistente) {
+            return res.status(400).json({
+                ok: false,
+                msg: "Ya existe un inmueble con el mismo tipo",
+            });
+        }
+        //ya creamos el inmubele y lo asociamos con el usuario
+        const inmuebleNuevo = new inmueble_models_1.default(Object.assign({ 
+            // asocio el suuario con el inmubele
+            usuario: idUsuario }, body));
         const inmuebleCreado = yield inmuebleNuevo.save();
-        console.log("esto es ", inmuebleNuevo);
         res.status(200).json({
             ok: true,
-            msg: "Producto registrado satisfactoriamente",
+            msg: "Inmueble registrado satisfactoriamente",
             inmuebleCreado,
         });
     }
@@ -31,23 +65,28 @@ const crearInmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* 
         console.log(error);
         res.status(400).json({
             ok: false,
-            msg: `error al crear el inmueble`,
+            msg: `Error al crear el inmueble`,
         });
     }
 });
 exports.crearInmueble = crearInmueble;
 const consultarInmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const inmuebles = yield inmueble_models_1.default.find();
+        const inmuebles = yield inmueble_models_1.default.find().populate({
+            path: 'usuario',
+            //me traigo el nombre el login y el rol
+            select: 'nombre login rol'
+        });
         res.json({
             ok: true,
             inmuebles,
         });
     }
     catch (error) {
+        console.log(error);
         res.status(400).json({
             ok: false,
-            msg: `Error al consultar inmuebles`,
+            msg: "Error al consultar inmuebles",
             error,
         });
     }

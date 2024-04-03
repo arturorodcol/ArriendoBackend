@@ -14,6 +14,6 @@ const UsuarioSchema = new mongoose_1.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 //model "NOMBRE DE BASE DE DATOS EN MONGOOSE"
-const UsuarioModel = (0, mongoose_1.model)("usuario", UsuarioSchema);
+const UsuarioModel = (0, mongoose_1.model)("Usuario", UsuarioSchema);
 exports.default = UsuarioModel;
 //# sourceMappingURL=usuario.models.js.map

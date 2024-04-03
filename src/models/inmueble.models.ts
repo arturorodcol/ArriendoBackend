@@ -3,12 +3,12 @@ import { Model, Schema, model } from "mongoose";
 const InmuebleSchema = new Schema ({
     tipoInmueble: { type: String, required: true, unique: true },
     fechaIngreso: { type: Date, required: true },
-    fechaPago: { type: Date, requiered: true},
+    fechaPago: { type: Date, required: true},
     valorPago: { type: Number, required: true },
     estado: { type: String, required: true, default: "disponible" },
-    createdAt: { type: Date, default: Date.now() },
-    updatedAt: { type: Date, default: Date.now() }, 
-    usuario: { type: Schema.Types.ObjectId, ref: 'usuario', required: true }
+    usuario: { type: Schema.Types.ObjectId, ref: 'Usuario', required: true, unique: true }, // Referencia al usuario
+    createdAt: { type: Date, default: Date.now },
+    updatedAt: { type: Date, default: Date.now }, 
 });
 
 const InmuebleModel: Model<any> = model("Inmueble", InmuebleSchema);
