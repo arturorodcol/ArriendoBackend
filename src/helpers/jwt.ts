@@ -11,7 +11,7 @@ const generateJWT = (
             _id,
             login,
         };
-        console.log("this is", payload);
+        console.log("", payload);
         jwt.sign(
             payload,
             jwtSecret, 
@@ -21,7 +21,7 @@ const generateJWT = (
             (error: string, token: string) => {
                 if (error) {
                     console.log(error);
-                    reject("No se puede generar token");
+                    reject("No se puede generar el token");
                 } else resolve(token);
             }
         );
