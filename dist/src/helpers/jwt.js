@@ -13,7 +13,7 @@ const generateJWT = (_id, login = "", expiresIn = process.env.EXPIRES_IN, jwtSec
         }, (error, token) => {
             if (error) {
                 console.log(error);
-                reject("No se puede generar token");
+                reject("No se puede generar el token");
             }
             else
                 resolve(token);

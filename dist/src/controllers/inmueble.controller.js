@@ -94,19 +94,17 @@ const consultarInmueble = (req, res) => __awaiter(void 0, void 0, void 0, functi
 exports.consultarInmueble = consultarInmueble;
 const eliminarInmueble = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { body } = req;
-        const id = req._id;
+        const id = req.params.id;
         const inmuebleEliminado = yield inmueble_models_1.default.findByIdAndDelete(id);
         res.json({
             ok: true,
             msg: "Inmueble eliminado",
-            inmueble: inmuebleEliminado,
         });
     }
     catch (error) {
         res.status(400).json({
             ok: false,
-            msg: `Error al eliminar inmueble`,
+            msg: "Error al eliminar inmueble",
         });
     }
 });

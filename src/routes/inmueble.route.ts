@@ -28,12 +28,12 @@ router.get(
 
 router.delete(
     "/:id",
-    // validateJWT, 
+    validateJWT, 
     eliminarInmueble);
 
 router.put(
     "/:id",
-    // validateJWT, 
+    validateJWT, 
 actualizarInmueble);
 
 export default router;
