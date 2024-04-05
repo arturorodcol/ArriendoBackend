@@ -3,6 +3,8 @@ import { dbConnection } from "./database/connection";
 import usuarioRoutes from "./routes/usuario.route";
 import authRoutes from "./routes/auth.route";
 import inmuebleRoutes from "./routes/inmueble.route";
+import interaccionRoutes from "./routes/interaccion.route";
+import arriendoRoutes from "./routes/arriendo.route";
 import cors from "cors";
 
 
@@ -13,6 +15,8 @@ private apiPaths = {
     usuario: "/api/v1/usuario/",
     auth: "/api/v1/auth/",
     inmueble: "/api/v1/inmueble/",
+    interaccion: "/api/v1/interaccion/",
+    arriendo: "/api/v1/arriendo/"
 };
 
     constructor(){
@@ -41,6 +45,8 @@ private apiPaths = {
         this.app.use(this.apiPaths.usuario, usuarioRoutes);
         this.app.use(this.apiPaths.auth, authRoutes);
         this.app.use(this.apiPaths.inmueble, inmuebleRoutes); 
+        this.app.use(this.apiPaths.interaccion, interaccionRoutes); 
+        this.app.use(this.apiPaths.arriendo, arriendoRoutes); 
     }
 
     listen(): void {
