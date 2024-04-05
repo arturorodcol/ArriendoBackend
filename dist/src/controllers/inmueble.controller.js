@@ -104,7 +104,7 @@ const eliminarInmueble = (req, res) => __awaiter(void 0, void 0, void 0, functio
     catch (error) {
         res.status(400).json({
             ok: false,
-            msg: "Error al eliminar inmueble",
+            msg: "Error al eliminar el inmueble",
         });
     }
 });
