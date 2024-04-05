@@ -11,7 +11,7 @@ export const interaccionUsuario = async (req: Request, res: Response) => {
       if (interaccionExistente) {
         return res.status(409).json({
           ok: false,
-          msg: "Ya se ha enviado un formulario de contacto con esta dirección de correo electrónico."
+          msg: "Ya se ha enviado un formulario de contacto con la dirección de correo electrónico registrada."
         });
       }
 
