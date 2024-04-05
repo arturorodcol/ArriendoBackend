@@ -23,7 +23,7 @@ const interaccionUsuario = (req, res) => __awaiter(void 0, void 0, void 0, funct
         if (interaccionExistente) {
             return res.status(409).json({
                 ok: false,
-                msg: "Ya se ha enviado un formulario de contacto con esta dirección de correo electrónico."
+                msg: "Ya se ha enviado un formulario de contacto con la dirección de correo electrónico registrada."
             });
         }
         // Crear un nuevo documento del formulario de contacto
