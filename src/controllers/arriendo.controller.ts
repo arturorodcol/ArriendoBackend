@@ -22,7 +22,7 @@ export const consultarUsuarioInmueble = async (req: CustomRequest, res: Response
         console.log(error);
         res.status(400).json({
             ok: false,
-            msg: "Error al consultar usuario", 
+            msg: "Error al consultar el usuario", 
         });
     }
 }
