@@ -30,7 +30,7 @@ const login = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
         if (!validarPassword) {
             return res.status(401).json({
                 ok: false,
-                msg: "credenciales invalidas",
+                msg: "credenciales no válidas",
             });
         }
         const token = yield (0, jwt_1.default)(usuario._id, usuario.login);

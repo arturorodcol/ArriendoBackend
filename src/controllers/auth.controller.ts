@@ -21,7 +21,7 @@ export const login = async (req: Request, res: Response) => {
         if (!validarPassword) {
             return res.status(401).json({
                 ok: false,
-                msg: "credenciales invalidas",
+                msg: "credenciales no válidas",
             });
         }
 
